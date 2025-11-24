@@ -114,8 +114,100 @@ function updateYearInFooter() {
 }
 
 function handleBookingFormSubmit() {
-  // لم نعد نحتاج لأي منطق خاص هنا، لأن نموذج الحجز يُرسل مباشرة عبر Netlify Forms
-  // تركنا الاستدعاء موجودًا للحفاظ على البنية العامة بدون تعطيل سلوك الإرسال الافتراضي
+  const form = document.querySelector(".booking-form");
+  if (!form) return;
+
+  const existingSuccess = form.querySelector(".form-success");
+  const existingError = form.querySelector(".form-error");
+
+  const successMessage = existingSuccess || document.createElement("p");
+  successMessage.className = "form-success";
+
+  const errorMessage = existingError || document.createElement("p");
+  errorMessage.className = "form-error";
+
+  const params = new URLSearchParams(window.location.search);
+  const urlSpecialist = params.get("specialist");
+
+  function encode(data) {
+    return Object.keys(data)
+      .map(
+        (key) =>
+          encodeURIComponent(key) + "=" + encodeURIComponent(data[key] ?? "")
+      )
+      .join("&");
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    successMessage.textContent = "";
+    errorMessage.textContent = "";
+
+    const formData = new FormData(form);
+
+    // تأكد من وجود اسم النموذج ليتعرف Netlify على الإرسال
+    if (!formData.get("form-name")) {
+      formData.append("form-name", form.getAttribute("name") || "booking");
+    }
+
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    const submitButton = form.querySelector("button[type='submit']");
+    const originalButtonText = submitButton ? submitButton.textContent : "";
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "جاري إرسال الطلب...";
+    }
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Netlify form submission failed");
+        }
+
+        const select = document.getElementById("specialistSelect");
+        form.reset();
+
+        if (select && urlSpecialist) {
+          for (const option of select.options) {
+            if (option.value === urlSpecialist) {
+              option.selected = true;
+              break;
+            }
+          }
+        }
+
+        successMessage.textContent =
+          "تم استلام طلب الحجز بنجاح، سيتم التواصل معك خلال 24–48 ساعة عمل لتأكيد الموعد.";
+
+        if (!existingSuccess) {
+          form.appendChild(successMessage);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        errorMessage.textContent =
+          "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.";
+
+        if (!existingError) {
+          form.appendChild(errorMessage);
+        }
+      })
+      .finally(() => {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      });
+  });
 }
 
 function setupMobileNav() {
