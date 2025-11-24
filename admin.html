@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم | واحة التوازن</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="theme">
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="index.html" class="brand">
+          <div class="brand-logo">
+            <span class="logo-mark">و</span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">واحة التوازن</span>
+            <span class="brand-tagline">لوحة إدارة الحجوزات</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <div class="container">
+          <h1>لوحة التحكم في الحجوزات</h1>
+          <p>أدخل كلمة المرور للوصول إلى قائمة الحجوزات.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div id="loginSection">
+            <form id="adminLoginForm" class="booking-form">
+              <label class="field">
+                <span>كلمة المرور</span>
+                <input type="password" id="adminPassword" required />
+              </label>
+              <button type="submit" class="btn btn-primary btn-full">
+                دخول
+              </button>
+              <p
+                id="loginError"
+                class="form-error"
+                style="display: none; color: #b91c1c; margin-top: 0.75rem"
+              >
+                كلمة المرور غير صحيحة.
+              </p>
+            </form>
+          </div>
+
+          <div id="dashboardSection" style="display: none">
+            <div
+              class="section-header"
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+              "
+            >
+              <h2>جميع الحجوزات</h2>
+              <button id="logoutBtn" class="btn btn-secondary">
+                تسجيل الخروج
+              </button>
+            </div>
+
+            <div style="margin: 1rem 0">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="بحث بالاسم أو البريد أو رقم الجوال..."
+                style="
+                  width: 100%;
+                  max-width: 360px;
+                  padding: 0.5rem 0.75rem;
+                  border-radius: 0.5rem;
+                  border: 1px solid #d1d5db;
+                "
+              />
+            </div>
+
+            <div class="table-wrapper" style="overflow-x: auto">
+              <table
+                class="data-table"
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  font-size: 0.9rem;
+                "
+              >
+                <thead>
+                  <tr style="background: #eff3fb">
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      التاريخ
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      الاسم
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      البريد
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      الجوال
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      الأخصائي
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      الخدمة
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      الجلسة
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      اليوم/الفترة
+                    </th>
+                    <th
+                      style="padding: 0.5rem; border-bottom: 1px solid #e5e7eb"
+                    >
+                      ملاحظات
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTableBody"></tbody>
+              </table>
+            </div>
+
+            <p
+              id="dashboardStatus"
+              style="margin-top: 0.75rem; font-size: 0.85rem; color: #6b7280"
+            ></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> واحة التوازن. جميع الحقوق محفوظة.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const loginSection = document.getElementById("loginSection");
+      const dashboardSection = document.getElementById("dashboardSection");
+      const adminLoginForm = document.getElementById("adminLoginForm");
+      const adminPasswordInput = document.getElementById("adminPassword");
+      const loginError = document.getElementById("loginError");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const searchInput = document.getElementById("searchInput");
+      const bookingsTableBody = document.getElementById("bookingsTableBody");
+      const dashboardStatus = document.getElementById("dashboardStatus");
+
+      let allBookings = [];
+
+      function isAuthed() {
+        return localStorage.getItem("wahat_admin_authed") === "true";
+      }
+
+      function setAuthed(value) {
+        if (value) {
+          localStorage.setItem("wahat_admin_authed", "true");
+        } else {
+          localStorage.removeItem("wahat_admin_authed");
+        }
+      }
+
+      async function fetchBookings(password) {
+        dashboardStatus.textContent = "جاري تحميل الحجوزات...";
+        bookingsTableBody.innerHTML = "";
+
+        try {
+          const res = await fetch("/.netlify/functions/listBookings", {
+            method: "GET",
+            headers: {
+              "X-Admin-Password": password,
+            },
+          });
+
+          if (res.status === 401) {
+            throw new Error("unauthorized");
+          }
+
+          if (!res.ok) {
+            throw new Error("failed");
+          }
+
+          const json = await res.json();
+          allBookings = json.bookings || [];
+          renderBookings(allBookings);
+
+          dashboardStatus.textContent = allBookings.length
+            ? `عدد الحجوزات: ${allBookings.length}`
+            : "لا توجد حجوزات حتى الآن.";
+        } catch (err) {
+          console.error(err);
+          dashboardStatus.textContent =
+            "تعذر جلب الحجوزات. تأكد من كلمة المرور والإعدادات.";
+          setAuthed(false);
+          showLogin();
+        }
+      }
+
+      function renderBookings(list) {
+        bookingsTableBody.innerHTML = "";
+
+        list.forEach((b) => {
+          const tr = document.createElement("tr");
+
+          const createdAt = b.created_at
+            ? new Date(b.created_at).toLocaleString("ar-SA")
+            : "-";
+
+          const preferred = `${b.preferred_date || "-"} / ${
+            b.preferred_time || "-"
+          }`;
+
+          tr.innerHTML = `
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6; white-space:nowrap;">${createdAt}</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${
+              b.full_name || "-"
+            }</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${
+              b.email || "-"
+            }</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${
+              b.phone || "-"
+            }</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${
+              b.specialist || "بدون تفضيل"
+            }</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${
+              b.service || "-"
+            }</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${
+              b.mode || "-"
+            }</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6;">${preferred}</td>
+            <td style="padding:0.5rem; border-bottom:1px solid #f3f4f6; max-width:260px; white-space:pre-wrap;">${
+              b.notes || "-"
+            }</td>
+          `;
+
+          bookingsTableBody.appendChild(tr);
+        });
+      }
+
+      function showDashboard() {
+        loginSection.style.display = "none";
+        dashboardSection.style.display = "block";
+      }
+
+      function showLogin() {
+        loginSection.style.display = "block";
+        dashboardSection.style.display = "none";
+      }
+
+      adminLoginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        loginError.style.display = "none";
+
+        const password = adminPasswordInput.value.trim();
+        if (!password) return;
+
+        try {
+          const res = await fetch("/.netlify/functions/listBookings", {
+            method: "GET",
+            headers: {
+              "X-Admin-Password": password,
+            },
+          });
+
+          if (res.status === 401) {
+            loginError.style.display = "block";
+            setAuthed(false);
+            return;
+          }
+
+          if (!res.ok) {
+            loginError.textContent = "حدث خطأ أثناء تسجيل الدخول. حاول لاحقًا.";
+            loginError.style.display = "block";
+            return;
+          }
+
+          const json = await res.json();
+          allBookings = json.bookings || [];
+          setAuthed(true);
+          showDashboard();
+          renderBookings(allBookings);
+          dashboardStatus.textContent = allBookings.length
+            ? `عدد الحجوزات: ${allBookings.length}`
+            : "لا توجد حجوزات حتى الآن.";
+        } catch (err) {
+          console.error(err);
+          loginError.textContent = "تعذر الاتصال بالخادم. تأكد من الإعدادات.";
+          loginError.style.display = "block";
+        }
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        setAuthed(false);
+        adminPasswordInput.value = "";
+        showLogin();
+      });
+
+      searchInput.addEventListener("input", () => {
+        const q = searchInput.value.trim().toLowerCase();
+        if (!q) {
+          renderBookings(allBookings);
+          return;
+        }
+
+        const filtered = allBookings.filter((b) => {
+          const target = `${b.full_name || ""} ${b.email || ""} ${
+            b.phone || ""
+          }`.toLowerCase();
+          return target.includes(q);
+        });
+
+        renderBookings(filtered);
+      });
+
+      window.addEventListener("load", () => {
+        if (isAuthed()) {
+          showDashboard();
+          const cachedPassword = prompt("أدخل كلمة المرور لتحميل الحجوزات:");
+          if (cachedPassword) {
+            fetchBookings(cachedPassword);
+          } else {
+            setAuthed(false);
+            showLogin();
+          }
+        } else {
+          showLogin();
+        }
+      });
+    </script>
+  </body>
+</html>

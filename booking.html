@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حجز موعد | واحة التوازن</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="theme">
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="index.html" class="brand">
+          <div class="brand-logo">
+            <span class="logo-mark">و</span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">واحة التوازن</span>
+            <span class="brand-tagline">مساحتك الآمنة للصحة النفسية</span>
+          </div>
+        </a>
+        <button class="nav-toggle" aria-label="فتح وإغلاق القائمة">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">الرئيسية</a>
+          <a href="specialists.html" class="nav-link">الأخصائيون</a>
+          <a href="booking.html" class="nav-link nav-cta active">احجز موعدك</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <div class="container">
+          <h1>نموذج حجز موعد</h1>
+          <p>
+            يرجى تعبئة البيانات التالية بدقة، وسيتم التواصل معك لتأكيد الموعد
+            وتفاصيل الجلسة.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container booking-layout">
+          <form
+            class="booking-form"
+            name="booking"
+            method="post"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="booking" />
+            <p style="display: none">
+              <label
+                >لا تملأ هذا الحقل إن كنت إنسانًا: <input name="bot-field"
+              /></label>
+            </p>
+            <div class="form-group-inline">
+              <label class="field">
+                <span>الاسم الكامل</span>
+                <input
+                  type="text"
+                  name="fullName"
+                  required
+                  placeholder="مثال: أحمد محمد"
+                />
+              </label>
+              <label class="field">
+                <span>البريد الإلكتروني</span>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                />
+              </label>
+            </div>
+
+            <div class="form-group-inline">
+              <label class="field">
+                <span>رقم الجوال (واتساب)</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="مثال: 9665XXXXXXXX"
+                />
+              </label>
+              <label class="field">
+                <span>الدولة/المدينة</span>
+                <input
+                  type="text"
+                  name="location"
+                  placeholder="مثال: السعودية - الرياض"
+                />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>اختيار الأخصائي (اختياري)</span>
+              <select name="specialist" id="specialistSelect">
+                <option value="">لا يوجد تفضيل محدد</option>
+              </select>
+            </label>
+
+            <div class="form-group-inline">
+              <label class="field">
+                <span>نوع الخدمة</span>
+                <select name="service" required>
+                  <option value="consultation">استشارة نفسية فردية</option>
+                  <option value="followup">جلسة متابعة</option>
+                  <option value="family">استشارة أسرية/زوجية</option>
+                  <option value="group">جلسة جماعية / توعوية</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>نوع الجلسة</span>
+                <select name="mode" required>
+                  <option value="online">أونلاين (مرئي/صوتي)</option>
+                  <option value="inperson">حضوري (إن توفر)</option>
+                  <option value="flexible">لا فرق، حسب المتاح</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form-group-inline">
+              <label class="field">
+                <span>اليوم المفضّل</span>
+                <input type="date" name="preferredDate" />
+              </label>
+              <label class="field">
+                <span>الفترة المفضّلة</span>
+                <select name="preferredTime">
+                  <option value="">لا يوجد تفضيل محدد</option>
+                  <option value="morning">الصباح</option>
+                  <option value="afternoon">الظهيرة / بعد العصر</option>
+                  <option value="evening">المساء</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="field">
+              <span>سبب الحجز / ما الذي تودّ مناقشته؟</span>
+              <textarea
+                name="notes"
+                rows="5"
+                placeholder="اكتب بإيجاز ما ترغب في مناقشته في الجلسة أو ما تشعر به حاليًا..."
+              ></textarea>
+            </label>
+
+            <label class="checkbox-field">
+              <input type="checkbox" name="agree" required />
+              <span
+                >أقرّ بأنني قرأت وفهمت سياسة السرية وشروط استخدام الخدمة.</span
+              >
+            </label>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              إرسال طلب الحجز
+            </button>
+
+            <p class="form-footnote">
+              سيتم التواصل معك خلال 24–48 ساعة عمل لتأكيد الموعد وتفاصيل الدفع
+              وطريقة الجلسة.
+            </p>
+          </form>
+
+          <aside class="booking-side">
+            <div class="info-box">
+              <h2>معلومات مهمة</h2>
+              <ul class="check-list small">
+                <li>الجلسات ليست بديلًا عن الطوارئ الطبية أو الإسعافية.</li>
+                <li>البيانات التي تشاركها معنا تُعامل بسرية تامّة.</li>
+                <li>يمكنك طلب تغيير الأخصائي في أي وقت قبل تأكيد الجلسة.</li>
+              </ul>
+            </div>
+            <div class="info-box muted">
+              <h3>هل تحتاج لمساعدة عاجلة؟</h3>
+              <p>
+                في حال وجود خطر فوري عليك أو على من حولك، يُرجى التواصل مباشرة
+                مع أقرب جهة طبية أو رقم طوارئ في بلدك.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-logo small">
+              <span class="logo-mark">و</span>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">واحة التوازن</span>
+              <span class="brand-tagline"
+                >منصة استشارات وحجوزات للصحة النفسية</span
+              >
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <nav class="footer-nav">
+            <a href="index.html">الرئيسية</a>
+            <a href="specialists.html">الأخصائيون</a>
+            <a href="booking.html">احجز موعدك</a>
+          </nav>
+        </div>
+        <div>
+          <h4>تواصل معنا</h4>
+          <p class="contact-line">بريد إلكتروني: support@example.com</p>
+          <p class="contact-line">واتساب (مثال): +966 5 0000 0000</p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="year"></span> واحة التوازن. جميع الحقوق محفوظة.</span>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+      // قراءة اسم الأخصائي من رابط الحجز (إن وجد) وملء القائمة تلقائيًا
+      const params = new URLSearchParams(window.location.search);
+      const specialist = params.get("specialist");
+      if (specialist) {
+        const select = document.getElementById("specialistSelect");
+        if (select) {
+          for (const option of select.options) {
+            if (option.value === specialist) {
+              option.selected = true;
+              break;
+            }
+          }
+        }
+      }
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
