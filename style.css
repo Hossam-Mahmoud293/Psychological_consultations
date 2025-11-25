@@ -69,23 +69,24 @@ main {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-dark),
-    var(--color-primary)
-  );
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.25rem;
+  box-shadow: 0 8px 20px rgba(15, 76, 129, 0.25);
+  background-color: transparent;
 }
 
 .brand-logo.small {
   width: 32px;
   height: 32px;
   font-size: 1rem;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .brand-text {
@@ -97,6 +98,11 @@ main {
 .brand-name {
   font-weight: 700;
   font-size: 1.1rem;
+}
+
+.brand-inline {
+  color: var(--color-primary-dark);
+  text-shadow: 0 0 12px rgba(37, 99, 235, 0.35);
 }
 
 .brand-tagline {
@@ -282,21 +288,30 @@ main {
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.25rem;
+  gap: 1.2rem;
 }
 
 .card {
   background-color: var(--color-surface);
-  border-radius: 0.9rem;
-  padding: 1.25rem 1.1rem;
+  border-radius: 1rem;
+  padding: 1.1rem 1rem;
   border: 1px solid rgba(209, 213, 219, 0.9);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.35);
 }
 
 .card h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-size: 1rem;
+  color: var(--color-primary-dark);
 }
 
 .card p {
@@ -341,6 +356,11 @@ main {
 .highlight-box p {
   color: #e5efff;
   font-size: 0.9rem;
+}
+
+.highlight-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.5);
 }
 
 .page-header {
@@ -435,6 +455,29 @@ main {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease;
 }
 
+.field input[type="date"] {
+  padding-inline-start: 0.75rem;
+  padding-inline-end: 0.75rem;
+  color-scheme: light;
+}
+
+.field input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 0.15rem;
+  filter: hue-rotate(-10deg) saturate(1.2);
+}
+
+.field input[type="date"]:hover {
+  border-color: rgba(37, 99, 235, 0.6);
+}
+
+input,
+select,
+textarea {
+  outline: none;
+}
+
 .field textarea {
   resize: vertical;
 }
@@ -523,21 +566,30 @@ main {
 
 .site-footer {
   border-top: 1px solid rgba(209, 213, 219, 0.7);
-  background-color: #f9fafb;
+  background: radial-gradient(
+    circle at top,
+    #e0edff 0,
+    #f9fafb 40%,
+    #f3f4f6 100%
+  );
+  background-size: 200% 200%;
+  animation: footerGlow 14s ease-in-out infinite;
   margin-top: 2rem;
   padding-bottom: 1.5rem; /* تأكيد ظهور آخر الفوتر فوق حافة الشاشة */
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.4fr) minmax(0, 1.5fr);
-  gap: 1.8rem;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: 1.5rem;
   padding: 1.7rem 0 1.2rem;
 }
 
 .footer-nav {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.45rem;
 }
 
@@ -549,6 +601,8 @@ main {
 
 .footer-nav a:hover {
   color: var(--color-primary-dark);
+  text-decoration: underline;
+  transform: translateX(-2px);
 }
 
 .footer-note {
@@ -567,12 +621,110 @@ main {
   border-top: 1px solid rgba(209, 213, 219, 0.7);
   padding: 0.7rem 0 0.9rem;
   font-size: 0.8rem;
-  color: var(--color-text-muted);
+  color: rgba(100, 116, 139, 0.9);
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+    text-align: center;
+  }
+
+  .footer-brand {
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  .footer-note {
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.social-link {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.3);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.social-whatsapp {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.social-instagram {
+  background: radial-gradient(circle at 30% 30%, #f97316, #ec4899 40%, #6366f1);
+}
+
+.social-facebook {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+}
+
+.social-x {
+  background: linear-gradient(135deg, #0f172a, #020617);
+}
+
+.social-telegram {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+}
+
+.social-link:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.4);
+  filter: brightness(1.08);
+}
+
+@keyframes footerGlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
 }
 
 .footer-brand {
   align-items: center;
+  justify-content: center;
+}
+
+.footer-brand .brand-logo {
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.footer-brand .brand-text {
+  align-items: center;
+  text-align: center;
+}
+
+.footer-brand:hover .brand-logo {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(15, 76, 129, 0.35);
 }
 
 .specialists-grid {
@@ -587,6 +739,14 @@ main {
   padding: 1.2rem 1.1rem;
   border: 1px solid rgba(209, 213, 219, 0.9);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.specialist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.35);
 }
 
 .specialist-header {
@@ -651,6 +811,7 @@ main {
 .note-area h3 {
   margin: 0 0 0.3rem;
   font-size: 0.85rem;
+  color: var(--color-primary-dark);
 }
 
 .note-area p {
@@ -671,6 +832,14 @@ main {
   border-radius: 1rem;
   border: 1px solid rgba(209, 213, 219, 0.9);
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.booking-form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.35);
 }
 
 .booking-side {
@@ -684,6 +853,8 @@ main {
   border-radius: 0.9rem;
   padding: 1rem 0.9rem;
   border: 1px solid rgba(37, 99, 235, 0.3);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
 }
 
 .info-box.muted {
@@ -691,10 +862,17 @@ main {
   border-color: rgba(148, 163, 184, 0.5);
 }
 
+.info-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
 .info-box h2,
 .info-box h3 {
   margin: 0 0 0.5rem;
   font-size: 1rem;
+  color: var(--color-primary-dark);
 }
 
 .checkbox-field {
@@ -724,6 +902,16 @@ main {
   border-radius: 0.7rem;
   padding: 0.6rem 0.7rem;
   border: 1px solid #bbf7d0;
+}
+
+.form-error {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border-radius: 0.7rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #fecaca;
 }
 
 .form-group-inline {

@@ -35,6 +35,120 @@ const specialistsData = [
   },
 ];
 
+const countries = [
+  "السعودية",
+  "مصر",
+  "الإمارات",
+  "الكويت",
+  "قطر",
+  "البحرين",
+  "عُمان",
+  "اليمن",
+  "الأردن",
+  "فلسطين",
+  "لبنان",
+  "سوريا",
+  "العراق",
+  "ليبيا",
+  "تونس",
+  "الجزائر",
+  "المغرب",
+  "موريتانيا",
+  "السودان",
+  "تركيا",
+  "الولايات المتحدة",
+  "كندا",
+  "المملكة المتحدة",
+  "ألمانيا",
+  "فرنسا",
+  "إيطاليا",
+  "إسبانيا",
+  "هولندا",
+  "بلجيكا",
+  "السويد",
+  "النرويج",
+  "سويسرا",
+  "النمسا",
+  "اليونان",
+  "قبرص",
+  "الهند",
+  "باكستان",
+  "إندونيسيا",
+  "ماليزيا",
+  "سنغافورة",
+  "الصين",
+  "اليابان",
+  "كوريا الجنوبية",
+  "الفلبين",
+  "أستراليا",
+  "نيوزيلندا",
+  "البرازيل",
+  "الأرجنتين",
+  "المكسيك",
+  "جنوب أفريقيا",
+  "نيجيريا",
+  "إثيوبيا",
+  "روسيا",
+  "أوكرانيا",
+  "بولندا",
+  "رومانيا",
+  "بلغاريا",
+  "التشيك",
+  "المجر",
+  "فنلندا",
+  "الدانمارك",
+  "أيرلندا",
+  "البرتغال",
+  "كازاخستان",
+  "أفغانستان",
+  "بنغلاديش",
+  "سريلانكا",
+  "نيبال",
+  "تايلاند",
+  "فيتنام",
+  "لاوس",
+  "كمبوديا",
+  "ميانمار",
+  "السلفادور",
+  "بنما",
+  "كولومبيا",
+  "تشيلي",
+  "بيرو",
+  "فنزويلا",
+  "الإكوادور",
+  "السعودية",
+];
+
+const locationData = {
+  السعودية: [
+    "الرياض",
+    "جدة",
+    "الدمام",
+    "الخبر",
+    "مكة المكرمة",
+    "المدينة المنورة",
+    "الطائف",
+  ],
+  مصر: [
+    "القاهرة",
+    "الجيزة",
+    "الإسكندرية",
+    "طنطا",
+    "المنصورة",
+    "أسيوط",
+    "سوهاج",
+  ],
+  الإمارات: ["دبي", "أبوظبي", "الشارقة", "العين", "رأس الخيمة"],
+  الكويت: ["مدينة الكويت", "حولي", "الفروانية", "الأحمدي"],
+  قطر: ["الدوحة", "الريان", "الوكرة"],
+  البحرين: ["المنامة", "المحرق"],
+  عُمان: ["مسقط", "صلالة"],
+  الأردن: ["عمّان", "إربد", "الزرقاء"],
+  المغرب: ["الرباط", "الدار البيضاء", "مراكش", "فاس"],
+  الجزائر: ["الجزائر", "وهران", "قسنطينة"],
+  تونس: ["تونس", "صفاقس", "سوسة"],
+};
+
 function renderSpecialistsCards() {
   const container = document.querySelector(".specialists-grid");
   if (!container) return;
@@ -113,6 +227,53 @@ function updateYearInFooter() {
   }
 }
 
+function setupLocationSelects() {
+  const countrySelect = document.getElementById("countrySelect");
+  const cityInput = document.querySelector('input[name="city"]');
+  const cityDatalist = document.getElementById("citySuggestions");
+  if (!countrySelect || !cityInput || !cityDatalist) return;
+
+  countrySelect.innerHTML = "";
+  const defaultCountry = document.createElement("option");
+  defaultCountry.value = "";
+  defaultCountry.textContent = "اختر الدولة";
+  countrySelect.appendChild(defaultCountry);
+
+  countries.forEach((country) => {
+    const opt = document.createElement("option");
+    opt.value = country;
+    opt.textContent = country;
+    countrySelect.appendChild(opt);
+  });
+
+  let currentCities = [];
+
+  function renderCitySuggestions(query) {
+    cityDatalist.innerHTML = "";
+    if (!currentCities.length || !query) return;
+
+    const normalizedQuery = query.toLowerCase();
+    currentCities
+      .filter((city) => city.toLowerCase().includes(normalizedQuery))
+      .slice(0, 15)
+      .forEach((city) => {
+        const opt = document.createElement("option");
+        opt.value = city;
+        cityDatalist.appendChild(opt);
+      });
+  }
+
+  countrySelect.addEventListener("change", () => {
+    const selectedCountry = countrySelect.value;
+    currentCities = locationData[selectedCountry] || [];
+    renderCitySuggestions(cityInput.value.trim());
+  });
+
+  cityInput.addEventListener("input", () => {
+    renderCitySuggestions(cityInput.value.trim());
+  });
+}
+
 function handleBookingFormSubmit() {
   const form = document.querySelector(".booking-form");
   if (!form) return;
@@ -128,6 +289,8 @@ function handleBookingFormSubmit() {
 
   const params = new URLSearchParams(window.location.search);
   const urlSpecialist = params.get("specialist");
+
+  const preferredDateInput = form.querySelector('input[name="preferredDate"]');
 
   function encode(data) {
     return Object.keys(data)
@@ -146,6 +309,29 @@ function handleBookingFormSubmit() {
 
     const formData = new FormData(form);
 
+    if (preferredDateInput) {
+      const value = preferredDateInput.value;
+      if (!value) {
+        errorMessage.textContent = "يرجى اختيار تاريخ للجلسة.";
+        if (!existingError) {
+          form.appendChild(errorMessage);
+        }
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const selectedDate = new Date(value);
+      if (selectedDate < today) {
+        errorMessage.textContent =
+          "لا يمكن اختيار تاريخ في الماضي، يرجى اختيار تاريخ مستقبلي.";
+        if (!existingError) {
+          form.appendChild(errorMessage);
+        }
+        return;
+      }
+    }
+
     // تأكد من وجود اسم النموذج ليتعرف Netlify على الإرسال
     if (!formData.get("form-name")) {
       formData.append("form-name", form.getAttribute("name") || "booking");
@@ -155,6 +341,13 @@ function handleBookingFormSubmit() {
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
+    const trackingId =
+      "WT-" +
+      Date.now().toString(36).toUpperCase() +
+      "-" +
+      Math.random().toString(36).substring(2, 6).toUpperCase();
+    data.trackingId = trackingId;
 
     const submitButton = form.querySelector("button[type='submit']");
     const originalButtonText = submitButton ? submitButton.textContent : "";
@@ -186,7 +379,10 @@ function handleBookingFormSubmit() {
         }
 
         successMessage.textContent =
-          "تم استلام طلب الحجز بنجاح، سيتم التواصل معك خلال 24–48 ساعة عمل لتأكيد الموعد.";
+          "تم استلام طلب الحجز بنجاح، سيتم التواصل معك خلال 24–48 ساعة عمل لتأكيد الموعد." +
+          " رقم المتابعة الخاص بطلبك هو: " +
+          trackingId +
+          "، احتفظ به لمتابعة طلبك معنا.";
 
         if (!existingSuccess) {
           form.appendChild(successMessage);
@@ -245,6 +441,7 @@ window.addEventListener("DOMContentLoaded", () => {
   renderSpecialistsCards();
   populateSpecialistSelect();
   updateYearInFooter();
+  setupLocationSelects();
   handleBookingFormSubmit();
   setupMobileNav();
 });
