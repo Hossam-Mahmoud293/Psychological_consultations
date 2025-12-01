@@ -1,0 +1,207 @@
+/* استايلات خاصة بخيارات الدفع في صفحة الحجز */
+
+/* قسم اختيار الدفع */
+.payment-method-selection {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f3e8ff 0, #ffffff 100%);
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+.payment-method-selection h4 {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* شبكة خيارات الدفع */
+.payment-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* بطاقة خيار الدفع */
+.payment-option-card {
+  cursor: pointer;
+  position: relative;
+}
+
+.payment-option-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.payment-card {
+  padding: 1.5rem;
+  border: 2px solid var(--color-border);
+  border-radius: 1rem;
+  background: white;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-border);
+  transition: background 0.3s ease;
+}
+
+.payment-card.online::before {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+.payment-card.inperson::before {
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+}
+
+/* تأثيرات التفاعل */
+.payment-option-card:hover .payment-card {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.15);
+}
+
+.payment-option-card input[type="radio"]:checked + .payment-card {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+.payment-option-card input[type="radio"]:checked + .payment-card::before {
+  background: var(--color-primary);
+}
+
+/* محتوى البطاقة */
+.payment-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.payment-info h5 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.payment-info p {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.payment-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.payment-card.online .payment-badge {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.payment-card.inperson .payment-badge {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* تأثيرات إضافية */
+.payment-option-card input[type="radio"]:checked + .payment-card .payment-icon {
+  animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+  .payment-options-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .payment-method-selection {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+
+  .payment-card {
+    padding: 1rem;
+  }
+
+  .payment-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .payment-info h5 {
+    font-size: 1rem;
+  }
+
+  .payment-info p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-method-selection h4 {
+    font-size: 1.1rem;
+  }
+
+  .payment-card {
+    padding: 0.75rem;
+  }
+
+  .payment-icon {
+    font-size: 1.8rem;
+  }
+
+  .payment-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+}
+
+/* تحسين للطباعة */
+@media print {
+  .payment-method-selection {
+    background: white;
+    border: 1px solid #ccc;
+  }
+
+  .payment-card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+
+  .payment-option-card input[type="radio"]:checked + .payment-card {
+    border: 2px solid #000;
+  }
+}

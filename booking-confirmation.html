@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>طمأنينة | مساحتك للنمو والتطور</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="booking-styles.css" />
+    <style>
+      .confirmation-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+      }
+      .success-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .success-icon {
+        font-size: 4rem;
+        color: #16a34a;
+        margin-bottom: 1rem;
+        animation: bounce 0.5s ease;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      .booking-summary {
+        background: var(--color-surface);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+        border: 1px solid var(--color-border);
+      }
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .summary-row:last-child {
+        border-bottom: none;
+      }
+      .summary-label {
+        color: var(--color-text-muted);
+        font-weight: 500;
+      }
+      .summary-value {
+        color: var(--color-text-main);
+        font-weight: 600;
+      }
+      .payment-selection {
+        background: linear-gradient(135deg, #f3e8ff 0, #ffffff 100%);
+        border-radius: 1rem;
+        padding: 2rem;
+        border: 1px solid var(--color-border);
+      }
+      .payment-selection h3 {
+        margin: 0 0 1.5rem;
+        text-align: center;
+        color: var(--color-primary-dark);
+      }
+      .next-steps {
+        background: #f0f9ff;
+        border: 1px solid #0ea5e9;
+        padding: 1.5rem;
+        border-radius: 0.7rem;
+        margin-top: 2rem;
+      }
+      .next-steps h4 {
+        margin: 0 0 1rem;
+        color: #0369a1;
+      }
+      .step-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0;
+      }
+      .step-number {
+        width: 25px;
+        height: 25px;
+        background: #0ea5e9;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-left: 1rem;
+        font-size: 0.8rem;
+      }
+      .step-text {
+        flex: 1;
+        color: var(--color-text-main);
+      }
+    </style>
+  </head>
+  <body class="theme">
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="index.html" class="brand">
+          <div class="brand-logo">
+            <img src="logo.svg" alt="طمأنينة" class="logo-image" />
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">طمأنينة</span>
+            <span class="brand-tagline">مساحتك للنمو والتطور</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <div class="container">
+          <h1>تأكيد الحجز</h1>
+          <p>تم استلام طلبك بنجاح. يرجى اختيار طريقة الدفع لاستكمال الحجز.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="confirmation-container">
+            <!-- رسالة النجاح -->
+            <div class="success-header">
+              <div class="success-icon">✅</div>
+              <h2>تم استلام طلب الحجز بنجاح!</h2>
+              <p>رقم المتابعة: <strong id="trackingId">WT-XXXXXXXX</strong></p>
+            </div>
+
+            <!-- ملخص الحجز -->
+            <div class="booking-summary">
+              <h3>ملخص طلب الحجز</h3>
+              <div class="summary-row">
+                <span class="summary-label">الاسم الكامل:</span>
+                <span class="summary-value" id="fullName">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">البريد الإلكتروني:</span>
+                <span class="summary-value" id="email">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">رقم الجوال:</span>
+                <span class="summary-value" id="phone">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">نوع الخدمة:</span>
+                <span class="summary-value" id="service">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">الأخصائي:</span>
+                <span class="summary-value" id="specialist">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">التاريخ المفضل:</span>
+                <span class="summary-value" id="date">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">الفترة المفضلة:</span>
+                <span class="summary-value" id="time">-</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">نوع الجلسة:</span>
+                <span class="summary-value" id="mode">-</span>
+              </div>
+            </div>
+
+            <!-- اختيار الدفع -->
+            <div class="payment-selection">
+              <h3>🎯 اختر طريقة الدفع المناسبة لك</h3>
+              <div class="payment-options-grid">
+                <label class="payment-option-card">
+                  <input
+                    type="radio"
+                    name="payment-type"
+                    value="online"
+                    checked
+                  />
+                  <div class="payment-card online">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-info">
+                      <h5>دفع أونلاين فوراً</h5>
+                      <p>دفع آمن عبر البطاقة أو PayPal وتأكيد الحجز فوراً</p>
+                      <span class="payment-badge">موصى به</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="payment-option-card">
+                  <input type="radio" name="payment-type" value="inperson" />
+                  <div class="payment-card inperson">
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-info">
+                      <h5>الدفع عند الحضور</h5>
+                      <p>احجز الآن وادفع عند حضور الجلسة (نقداً أو بطاقة)</p>
+                      <span class="payment-badge">مرونة</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              <div style="margin-top: 2rem; text-align: center">
+                <button
+                  class="btn btn-primary btn-large"
+                  onclick="proceedToPayment()"
+                >
+                  استكمال الحجز
+                </button>
+              </div>
+            </div>
+
+            <!-- الخطوات التالية -->
+            <div class="next-steps">
+              <h4>📋 الخطوات التالية</h4>
+              <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-text">اختر طريقة الدفع المناسبة</div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                  أكمل الدفع (لو اخترت الدفع الأونلاين)
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                  استلم تأكيد الموعد على بريدك الإلكتروني
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-text">الحضور في الموعد المحدد</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-logo small">
+              <img src="logo.svg" alt="طمأنينة" class="logo-image" />
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">طمأنينة</span>
+              <span class="brand-tagline">مساحتك للنمو والتطور</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span
+          >© <span id="year"></span> <span class="brand-inline">طمأنينة</span>.
+          جميع الحقوق محفوظة.</span
+        >
+      </div>
+    </footer>
+
+    <script src="pricing-config.js"></script>
+    <script>
+      // استخراج بيانات الحجز من URL أو localStorage
+      function getBookingData() {
+        // محاولة الحصول على البيانات من localStorage
+        const savedData = localStorage.getItem("bookingData");
+        if (savedData) {
+          return JSON.parse(savedData);
+        }
+
+        // محاولة الحصول على البيانات من URL parameters
+        const params = new URLSearchParams(window.location.search);
+        return {
+          fullName: params.get("fullName") || "-",
+          email: params.get("email") || "-",
+          phone: params.get("phone") || "-",
+          service: params.get("service") || "-",
+          specialist: params.get("specialist") || "-",
+          date: params.get("preferredDate") || "-",
+          time: params.get("preferredTime") || "-",
+          mode: params.get("mode") || "-",
+          trackingId: params.get("trackingId") || generateTrackingId(),
+        };
+      }
+
+      // توليد رقم متابعة
+      function generateTrackingId() {
+        return (
+          "WT-" +
+          Date.now().toString(36).toUpperCase() +
+          "-" +
+          Math.random().toString(36).substring(2, 6).toUpperCase()
+        );
+      }
+
+      // تحديث الصفحة بالبيانات
+      function updatePageWithData(data) {
+        document.getElementById("trackingId").textContent = data.trackingId;
+        document.getElementById("fullName").textContent = data.fullName;
+        document.getElementById("email").textContent = data.email;
+        document.getElementById("phone").textContent = data.phone;
+        document.getElementById("service").textContent = getServiceName(
+          data.service
+        );
+        document.getElementById("specialist").textContent = getSpecialistName(
+          data.specialist
+        );
+        document.getElementById("date").textContent = formatDate(data.date);
+        document.getElementById("time").textContent = getTimeName(data.time);
+        document.getElementById("mode").textContent = getModeName(data.mode);
+      }
+
+      // الحصول على اسم الخدمة
+      function getServiceName(serviceId) {
+        const services = {
+          consultation: "استشارة نفسية فردية",
+          followup: "جلسة متابعة",
+          family: "استشارة أسرية/زوجية",
+          group: "جلسة جماعية / توعوية",
+        };
+        return services[serviceId] || serviceId || "-";
+      }
+
+      // الحصول على اسم الأخصائي
+      function getSpecialistName(specialistId) {
+        const specialists = {
+          amna: "أ. د. آمنة الراجحي",
+          samer: "أ. سامر الحربي",
+          lama: "أ. لمى السبيعي",
+        };
+        return specialists[specialistId] || "لا يوجد تفضيل محدد";
+      }
+
+      // تنسيق التاريخ
+      function formatDate(dateString) {
+        if (!dateString || dateString === "-") return "-";
+        const date = new Date(dateString);
+        return date.toLocaleDateString("ar-SA", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      // الحصول على اسم الوقت
+      function getTimeName(timeId) {
+        const times = {
+          morning: "الصباح",
+          afternoon: "الظهيرة / بعد العصر",
+          evening: "المساء",
+        };
+        return times[timeId] || "لا يوجد تفضيل محدد";
+      }
+
+      // الحصول على اسم الجلسة
+      function getModeName(modeId) {
+        const modes = {
+          online: "أونلاين (مرئي/صوتي)",
+          inperson: "حضوري (إن توفر)",
+          flexible: "لا فرق، حسب المتاح",
+        };
+        return modes[modeId] || modeId || "-";
+      }
+
+      // الاستمرار للدفع
+      function proceedToPayment() {
+        const paymentType = document.querySelector(
+          'input[name="payment-type"]:checked'
+        ).value;
+        const bookingData = getBookingData();
+
+        // حفظ طريقة الدفع المختارة
+        bookingData.paymentType = paymentType;
+        localStorage.setItem("bookingData", JSON.stringify(bookingData));
+
+        if (paymentType === "online") {
+          // توجيه لصفحة الدفع
+          window.location.href = `payment.html?service=${bookingData.service}&specialist=${bookingData.specialist}&discount=null&package=1`;
+        } else {
+          // الدفع عند الحضور - عرض رسالة تأكيد
+          showPaymentAtArrivalConfirmation();
+        }
+      }
+
+      // عرض تأكيد الدفع عند الحضور
+      function showPaymentAtArrivalConfirmation() {
+        const bookingData = getBookingData();
+        const confirmationHtml = `
+                <div style="text-align: center; padding: 2rem; background: #dcfce7; border-radius: 1rem; margin: 2rem 0;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="color: #16a34a; margin-bottom: 1rem;">تم تأكيد حجز موعدك بنجاح!</h3>
+                    <p style="color: #15803d; margin-bottom: 1rem;">
+                        رقم المتابعة: <strong>${bookingData.trackingId}</strong>
+                    </p>
+                    <p style="color: #15803d; margin-bottom: 1.5rem;">
+                        سيتم التواصل معك خلال 24 ساعة لتأكيد التفاصيل.<br>
+                        الرجاء الحضور قبل الموعد بـ 15 دقيقة.<br>
+                        الدفع سيتم عند الحضور (نقداً أو بطاقة).
+                    </p>
+                    <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                        العودة للصفحة الرئيسية
+                    </button>
+                </div>
+            `;
+
+        document.querySelector(".payment-selection").innerHTML =
+          confirmationHtml;
+      }
+
+      // تحديث السنة
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // إعداد الـ nav toggle
+      const navToggle = document.querySelector(".nav-toggle");
+      const mainNav = document.querySelector(".main-nav");
+
+      if (navToggle && mainNav) {
+        navToggle.addEventListener("click", () => {
+          mainNav.classList.toggle("active");
+          navToggle.classList.toggle("active");
+        });
+      }
+
+      // تحميل البيانات عند فتح الصفحة
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookingData = getBookingData();
+        updatePageWithData(bookingData);
+      });
+    </script>
+  </body>
+</html>

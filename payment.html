@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>طمأنينة | مساحتك للنمو والتطور</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="payment-styles.css" />
+  </head>
+  <body class="theme">
+    <header class="site-header">
+      <div class="container header-content">
+        <a href="index.html" class="brand">
+          <div class="brand-logo">
+            <img src="logo.svg" alt="طمأنينة" class="logo-image" />
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">طمأنينة</span>
+            <span class="brand-tagline">مساحتك للنمو والتطور</span>
+          </div>
+        </a>
+        <button class="nav-toggle" aria-label="فتح وإغلاق القائمة">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">الرئيسية</a>
+          <a href="specialists.html" class="nav-link">الأخصائيون</a>
+          <a href="booking.html" class="nav-link">احجز موعدك</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <div class="container">
+          <h1>إتمام الدفع</h1>
+          <p>اختر طريقة الدفع المناسبة لك. جميع المعاملات آمنة ومشفرة.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="payment-layout">
+            <!-- تفاصيل الطلب -->
+            <div class="order-summary">
+              <h2>ملخص الطلب</h2>
+              <div class="order-item">
+                <div class="item-info">
+                  <h3>استشارة نفسية فردية</h3>
+                  <p>مع أ. د. آمنة الراجحي</p>
+                  <p>التاريخ: 15 ديسمبر 2024</p>
+                  <p>الوقت: 8:00 مساءً</p>
+                </div>
+                <div class="item-price">299 ريال</div>
+              </div>
+
+              <div class="order-total">
+                <div class="total-row">
+                  <span>المجموع:</span>
+                  <span>299 ريال</span>
+                </div>
+                <div class="total-row">
+                  <span>ضريبة القيمة المضافة (15%):</span>
+                  <span>44.85 ريال</span>
+                </div>
+                <div class="total-row grand-total">
+                  <span>الإجمالي:</span>
+                  <span>343.85 ريال</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- خيارات الدفع -->
+            <div class="payment-options">
+              <h2>اختر طريقة الدفع</h2>
+
+              <!-- التحويل البنكي -->
+              <div class="payment-method">
+                <div class="method-header">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    id="bank"
+                    value="bank"
+                    checked
+                  />
+                  <label for="bank">
+                    <span class="method-icon">🏦</span>
+                    <span>تحويل بنكي</span>
+                    <span class="method-desc">تحويل مباشر للحساب البنكي</span>
+                  </label>
+                </div>
+                <div
+                  class="method-content"
+                  id="bank-content"
+                  style="display: block"
+                >
+                  <div class="bank-details">
+                    <h3>بيانات الحساب البنكي</h3>
+                    <div class="detail-row">
+                      <span>اسم المستفيد:</span>
+                      <span>شركة طمأنينة</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>رقم الحساب:</span>
+                      <span>SA1234567890123456789012</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>اسم البنك:</span>
+                      <span>البنك الأهلي السعودي</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>IBAN:</span>
+                      <span>SA89 3000 0000 0000 0000 0000</span>
+                    </div>
+                    <div class="detail-row">
+                      <span>الفرع:</span>
+                      <span>فرع الرياض - الرئيسي</span>
+                    </div>
+                  </div>
+                  <div class="bank-note">
+                    <p>
+                      بعد إتمام التحويل، يرجى إرسال صورة من إيصال التحويل على
+                      الواتساب
+                    </p>
+                    <button
+                      class="btn btn-outline btn-full"
+                      onclick="window.open('https://wa.me/966500000000', '_blank')"
+                    >
+                      إرسال الإيصال على الواتساب
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- الدفع عند الحضور -->
+              <div class="payment-method">
+                <div class="method-header">
+                  <input
+                    type="radio"
+                    name="payment-method"
+                    id="inperson"
+                    value="inperson"
+                  />
+                  <label for="inperson">
+                    <span class="method-icon">💵</span>
+                    <span>الدفع عند الحضور</span>
+                    <span class="method-desc"
+                      >دفع نقداً أو بالبطاقة في الجلسة</span
+                    >
+                  </label>
+                </div>
+                <div
+                  class="method-content"
+                  id="inperson-content"
+                  style="display: none"
+                >
+                  <div
+                    style="
+                      text-align: center;
+                      padding: 2rem;
+                      background: #f0f9ff;
+                      border-radius: 0.5rem;
+                      border: 1px solid #0ea5e9;
+                    "
+                  >
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem">💵</div>
+                    <h4 style="color: #0369a1; margin-bottom: 0.5rem">
+                      الدفع عند الحضور
+                    </h4>
+                    <p
+                      style="color: #0284c7; margin: 1rem 0; font-size: 1.1rem"
+                    >
+                      يمكنك الدفع في الجلسة نقداً أو بالبطاقة
+                    </p>
+                    <div
+                      style="
+                        background: #e0f2fe;
+                        padding: 1rem;
+                        border-radius: 0.5rem;
+                        margin: 1rem 0;
+                      "
+                    >
+                      <p style="color: #0c4a6e; margin: 0; font-size: 0.9rem">
+                        <strong>ملاحظة:</strong> يرجى الحضور قبل الموعد بـ 15
+                        دقيقة<br />
+                        يمكن الدفع نقداً أو بالبطاقة البنكية
+                      </p>
+                    </div>
+                    <button
+                      class="btn btn-primary btn-full"
+                      onclick="confirmInPersonPayment()"
+                    >
+                      تأكيد الحجز والدفع عند الحضور
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-logo small">
+              <img src="logo.svg" alt="طمأنينة" class="logo-image" />
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">طمأنينة</span>
+              <span class="brand-tagline">مساحتك للنمو والتطور</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>تواصل معنا</h4>
+          <ul class="social-links">
+            <li>
+              <a
+                href="#"
+                class="social-link social-whatsapp"
+                aria-label="واتساب"
+              >
+                W
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="social-link social-instagram"
+                aria-label="إنستغرام"
+              >
+                I
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="social-link social-facebook"
+                aria-label="فيسبوك"
+              >
+                F
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-link social-x" aria-label="إكس"> X </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="social-link social-telegram"
+                aria-label="تليجرام"
+              >
+                T
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span
+          >© <span id="year"></span> <span class="brand-inline">طمأنينة</span>.
+          جميع الحقوق محفوظة.</span
+        >
+      </div>
+    </footer>
+
+    <!-- Pricing Config -->
+    <script src="pricing-config.js"></script>
+
+    <script>
+      // عند تحميل الصفحة، استخراج بيانات الحجز وتحديث الأسعار
+      document.addEventListener("DOMContentLoaded", function () {
+        const bookingData = getBookingDataFromURL();
+        const pricing = updatePricingDisplay(
+          bookingData.service,
+          bookingData.specialist,
+          bookingData.discount,
+          bookingData.package
+        );
+
+        // حفظ بيانات الحجز
+        saveBookingData(pricing);
+
+        // تحديث تاريخ ووقت الجلسة
+        updateSessionDateTime();
+      });
+
+      // دالة تحديث تاريخ ووقت الجلسة
+      function updateSessionDateTime() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const dateStr = tomorrow.toLocaleDateString("ar-SA", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        const timeStr = "8:00 مساءً";
+
+        const dateElement = document.querySelector(".item-info p:nth-child(3)");
+        const timeElement = document.querySelector(".item-info p:nth-child(4)");
+
+        if (dateElement) dateElement.textContent = `التاريخ: ${dateStr}`;
+        if (timeElement) timeElement.textContent = `الوقت: ${timeStr}`;
+      }
+
+      // تبديل طرق الدفع
+      document
+        .querySelectorAll('input[name="payment-method"]')
+        .forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            // إخفاء كل المحتويات
+            document.querySelectorAll(".method-content").forEach((content) => {
+              content.style.display = "none";
+            });
+
+            // إظهار المحتوى المختار
+            const selectedContent = document.getElementById(
+              e.target.value + "-content"
+            );
+            if (selectedContent) {
+              selectedContent.style.display = "block";
+            }
+          });
+        });
+
+      // تأكيد الدفع عند الحضور
+      function confirmInPersonPayment() {
+        const bookingData = JSON.parse(
+          localStorage.getItem("bookingData") || "{}"
+        );
+
+        const confirmationHtml = `
+          <div class="payment-success">
+            <h3>✅ تم تأكيد حجز موعدك بنجاح!</h3>
+            <p>شكراً لك على اختيار الدفع عند الحضور</p>
+            <p>رقم المتابعة: ${
+              bookingData.trackingId ||
+              "WT-" + Date.now().toString(36).toUpperCase()
+            }</p>
+            <p>سيتم التواصل معك خلال 24 ساعة لتأكيد التفاصيل</p>
+            <p>الرجاء الحضور قبل الموعد بـ 15 دقيقة</p>
+            <button class="btn btn-primary" onclick="window.location.href='index.html'">العودة للرئيسية</button>
+          </div>
+        `;
+
+        document.querySelector(".payment-options").innerHTML = confirmationHtml;
+      }
+
+      // تحديث السنة
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // إعداد الـ nav toggle
+      const navToggle = document.querySelector(".nav-toggle");
+      const mainNav = document.querySelector(".main-nav");
+
+      if (navToggle && mainNav) {
+        navToggle.addEventListener("click", () => {
+          mainNav.classList.toggle("active");
+          navToggle.classList.toggle("active");
+        });
+      }
+    </script>
+  </body>
+</html>

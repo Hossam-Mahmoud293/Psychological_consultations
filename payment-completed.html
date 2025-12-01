@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إعدادات الدفع | العافية النفسية</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .payment-status-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+      }
+      .status-card {
+        background: var(--color-surface);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin: 1.5rem 0;
+        box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+        border: 1px solid var(--color-border);
+      }
+      .status-card.active {
+        border-color: var(--color-primary);
+        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+      }
+      .status-card.inactive {
+        opacity: 0.7;
+        border-color: #e5e7eb;
+      }
+      .status-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .status-icon {
+        font-size: 2rem;
+        margin-left: 1rem;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--color-primary-soft);
+      }
+      .status-icon.active {
+        background: #dcfce7;
+        color: #16a34a;
+      }
+      .status-icon.inactive {
+        background: #f3f4f6;
+        color: #6b7280;
+      }
+      .status-title {
+        flex: 1;
+      }
+      .status-title h3 {
+        margin: 0;
+        color: var(--color-text-main);
+      }
+      .status-title p {
+        margin: 0.25rem 0 0;
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+      }
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .badge-active {
+        background: #dcfce7;
+        color: #16a34a;
+      }
+      .badge-inactive {
+        background: #f3f4f6;
+        color: #6b7280;
+      }
+      .badge-coming-soon {
+        background: #fef3c7;
+        color: #d97706;
+      }
+      .status-details {
+        padding: 1rem;
+        background: #f9fafb;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+      }
+      .status-details h4 {
+        margin: 0 0 0.5rem;
+        color: var(--color-primary-dark);
+      }
+      .status-details p {
+        margin: 0;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+      }
+      .requirements-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+      }
+      .requirements-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e5e7eb;
+        color: var(--color-text-muted);
+      }
+      .requirements-list li:before {
+        content: "📋 ";
+        margin-left: 0.5rem;
+      }
+      .next-steps {
+        background: linear-gradient(135deg, #f3e8ff 0, #ffffff 100%);
+        padding: 1.5rem;
+        border-radius: 0.7rem;
+        border: 1px solid var(--color-border);
+        margin-top: 2rem;
+      }
+      .next-steps h4 {
+        margin: 0 0 1rem;
+        color: var(--color-primary-dark);
+      }
+      .step-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .step-number {
+        width: 30px;
+        height: 30px;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-left: 1rem;
+        font-size: 0.9rem;
+      }
+      .step-text {
+        flex: 1;
+        color: var(--color-text-main);
+      }
+    </style>
+  </head>
+  <body class="theme">
+    <div class="container">
+      <div class="payment-status-container">
+        <h1>💳 حالة طرق الدفع</h1>
+        <p>نظرة عامة على طرق الدفع المتاحة والمطلوبة لتفعيلها</p>
+
+        <!-- البطاقة البنكية - شغال -->
+        <div class="status-card active">
+          <div class="status-header">
+            <div class="status-icon active">💳</div>
+            <div class="status-title">
+              <h3>البطاقة البنكية</h3>
+              <p>فيزا، ماستر كارد، مدي</p>
+            </div>
+            <span class="status-badge badge-active">شغال</span>
+          </div>
+          <div class="status-details">
+            <h4>✅ الحالة: نشط وجاهز للاستخدام</h4>
+            <p>
+              نظام البطاقات البنكية يعمل بشكل كامل كـ demo. العميل يمكنه ملء
+              البيانات والنظام يحاكي عملية الدفع بنجاح. لتفعيل الدفع الحقيقي،
+              ستحتاج إلى:
+            </p>
+            <ul class="requirements-list">
+              <li>حساب Stripe مع Publishable Key</li>
+              <li>سجل تجاري للتعامل مع معالجات الدفع</li>
+              <li>شهادة SSL للمعاملات الآمنة</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- التحويل البنكي - شغال -->
+        <div class="status-card active">
+          <div class="status-header">
+            <div class="status-icon active">🏦</div>
+            <div class="status-title">
+              <h3>التحويل البنكي</h3>
+              <p>تحويل مباشر للحساب البنكي</p>
+            </div>
+            <span class="status-badge badge-active">شغال</span>
+          </div>
+          <div class="status-details">
+            <h4>✅ الحالة: نشط وجاهز للاستخدام</h4>
+            <p>
+              التحويل البنكي يعمل 100% ويعتبر الطريقة الأكثر أماناً في الوقت
+              الحالي. كل ما تحتاجه هو إضافة بيانات حسابك البنكية الحقيقية في
+              صفحة الدفع.
+            </p>
+            <ul class="requirements-list">
+              <li>حساب بنكي شخصي أو تجاري</li>
+              <li>رقم IBAN صحيح</li>
+              <li>رقم واتساب للتواصل</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PayPal - قيد الإعداد -->
+        <div class="status-card inactive">
+          <div class="status-header">
+            <div class="status-icon inactive">💳</div>
+            <div class="status-title">
+              <h3>PayPal</h3>
+              <p>دفع آمن عبر PayPal</p>
+            </div>
+            <span class="status-badge badge-coming-soon">قريباً</span>
+          </div>
+          <div class="status-details">
+            <h4>⏳ الحالة: قيد الإعداد</h4>
+            <p>
+              PayPal معطل مؤقتاً ويعرض رسالة "قيد التطوير". لتفعيله ستحتاج إلى:
+            </p>
+            <ul class="requirements-list">
+              <li>حساب PayPal Business</li>
+              <li>Client ID من PayPal Developer</li>
+              <li>سجل تجاري (للتعاملات الكبيرة)</li>
+              <li>ربط الحساب البنكي بـ PayPal</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Apple Pay - قيد التطوير -->
+        <div class="status-card inactive">
+          <div class="status-header">
+            <div class="status-icon inactive">🍎</div>
+            <div class="status-title">
+              <h3>Apple Pay</h3>
+              <p>دفع سريع وآمن</p>
+            </div>
+            <span class="status-badge badge-coming-soon">قيد التطوير</span>
+          </div>
+          <div class="status-details">
+            <h4>🔧 الحالة: قيد التطوير</h4>
+            <p>Apple Pay يتطلب متطلبات تقنية متقدمة. هذه الخدمة تحتاج إلى:</p>
+            <ul class="requirements-list">
+              <li>Apple Developer Account ($99/سنة)</li>
+              <li>شهادة SSL وتوقيع رمزي</li>
+              <li>سجل تجاري معتمد</li>
+              <li>موافقة Apple للخدمة</li>
+              <li>إعداد متقدم على الخادم</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- الخطوات التالية -->
+        <div class="next-steps">
+          <h4>🚀 الخطوات التالية للتفعيل الكامل</h4>
+
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              إضافة بيانات الحساب البنكي الحقيقية في payment.html
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">استخراج سجل تجاري للمنصة</div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              إنشاء حساب PayPal Business والحصول على Client ID
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">إعداد Stripe للدفع عبر البطاقات</div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              تركيب شهادة SSL ورفع الموقع على نطاق حقيقي
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-text">تفعيل Apple Pay (مرحلة متقدمة)</div>
+          </div>
+        </div>
+
+        <!-- ملخص سريع -->
+        <div
+          class="status-card"
+          style="background: linear-gradient(135deg, #f0f9ff 0, #ffffff 100%)"
+        >
+          <h3>📋 ملخص الوضع الحالي</h3>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 1rem;
+              margin-top: 1rem;
+            "
+          >
+            <div>
+              <h4>✅ شغال حالياً:</h4>
+              <ul>
+                <li>البطاقة البنكية (Demo)</li>
+                <li>التحويل البنكي (كامل)</li>
+                <li>نظام الحجز</li>
+                <li>خيارات الدفع عند الحضور</li>
+              </ul>
+            </div>
+            <div>
+              <h4>🔧 يحتاج تفعيل:</h4>
+              <ul>
+                <li>PayPal (يحتاج سجل تجاري)</li>
+                <li>Apple Pay (متقدم)</li>
+                <li>الدفع الحقيقي بالبطاقات</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

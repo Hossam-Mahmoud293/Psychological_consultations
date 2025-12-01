@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل تعديل الأسعار | العافية النفسية</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .guide-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: var(--color-surface);
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+      }
+      .code-block {
+        background: #1f2937;
+        color: #f9fafb;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+      }
+      .highlight {
+        color: #fbbf24;
+      }
+      .success {
+        color: #34d399;
+      }
+      .warning {
+        color: #f87171;
+      }
+      .section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.7rem;
+      }
+      .section h3 {
+        margin-top: 0;
+        color: var(--color-primary-dark);
+      }
+      .example-box {
+        background: #f0f9ff;
+        border: 1px solid #0ea5e9;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+      }
+      .price-display {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--color-primary-dark);
+        margin: 0.5rem 0;
+      }
+    </style>
+  </head>
+  <body class="theme">
+    <div class="container">
+      <div class="guide-container">
+        <h1>📋 دليل تعديل الأسعار والضرائب</h1>
+        <p>هذا الدليل يشرح كيفية تعديل الأسعار والضرائب في نظام الدفع.</p>
+
+        <!-- الأسعار الأساسية -->
+        <div class="section">
+          <h3>💰 1. تعديل أسعار الخدمات الأساسية</h3>
+          <p>
+            افتح ملف <code>pricing-config.js</code> وابحث عن كائن
+            <code>services</code>:
+          </p>
+
+          <div class="code-block">
+            <span class="highlight">services</span>: {
+            <span class="success">consultation</span>: { name: "استشارة نفسية
+            فردية", price: <span class="warning">299</span>, // ← غيّر هذا الرقم
+            duration: "60 دقيقة" }, <span class="success">followup</span>: {
+            name: "جلسة متابعة", price: <span class="warning">199</span>, // ←
+            غيّر هذا الرقم duration: "45 دقيقة" }, // ... باقي الخدمات }
+          </div>
+
+          <div class="example-box">
+            <strong>مثال:</strong> لزيادة سعر الاستشارة الفردية إلى 350 ريال:<br />
+            <code>price: 350,</code>
+          </div>
+        </div>
+
+        <!-- رسوم الأخصائيين -->
+        <div class="section">
+          <h3>👨‍⚕️ 2. تعديل رسوم الأخصائيين</h3>
+          <p>يمكن إضافة رسوم إضافية لكل أخصائي:</p>
+
+          <div class="code-block">
+            <span class="highlight">specialistFees</span>: {
+            <span class="success">amna</span>: <span class="warning">0</span>,
+            // بدون إضافة <span class="success">samer</span>:
+            <span class="warning">50</span>, // إضافة 50 ريال
+            <span class="success">lama</span>: <span class="warning">0</span> //
+            بدون إضافة }
+          </div>
+
+          <div class="example-box">
+            <strong>مثال:</strong> إذا أردت إضافة رسوم 30 ريال لأخصائية لمى:<br />
+            <code>lama: 30,</code>
+          </div>
+        </div>
+
+        <!-- الضرائب -->
+        <div class="section">
+          <h3>📊 3. تعديل ضريبة القيمة المضافة</h3>
+          <p>تغيير نسبة الضريبة (الافتراضي 15%):</p>
+
+          <div class="code-block">
+            <span class="highlight">taxRate</span>:
+            <span class="warning">0.15</span>, // 15% ضريبة
+          </div>
+
+          <div class="example-box">
+            <strong>أمثلة:</strong><br />
+            <code>0.15</code> ← 15% ضريبة (السعودية)<br />
+            <code>0.14</code> ← 14% ضريبة (مصر)<br />
+            <code>0.05</code> ← 5% ضريبة (دول أخرى)
+          </div>
+        </div>
+
+        <!-- الخصومات -->
+        <div class="section">
+          <h3>🎁 4. تعديل الخصومات والعروض</h3>
+          <p>إضافة أو تعديل الخصومات:</p>
+
+          <div class="code-block">
+            <span class="highlight">discounts</span>: {
+            <span class="success">firstSession</span>:
+            <span class="warning">0.1</span>, // 10% خصم أول جلسة
+            <span class="success">package3</span>:
+            <span class="warning">0.15</span>, // 15% خصم باقة 3 جلسات
+            <span class="success">package5</span>:
+            <span class="warning">0.25</span>, // 25% خصم باقة 5 جلسات
+            <span class="success">ramadan2024</span>:
+            <span class="warning">0.2</span> // 20% خصم رمضان (جديد) }
+          </div>
+
+          <div class="example-box">
+            <strong>إضافة خصم جديد:</strong><br />
+            <code>summer2024: 0.3,</code> ← 30% خصم صيف 2024
+          </div>
+        </div>
+
+        <!-- العملة -->
+        <div class="section">
+          <h3>💱 5. تغيير العملة</h3>
+          <p>تغيير العملة المستخدمة:</p>
+
+          <div class="code-block">
+            <span class="highlight">currency</span>:
+            <span class="warning">"SAR"</span>, // ريال سعودي
+            <span class="highlight">currencySymbol</span>:
+            <span class="warning">"ريال"</span> // الرمز
+          </div>
+
+          <div class="example-box">
+            <strong>عملات أخرى:</strong><br />
+            <code>"EGP", "جنيه"</code> ← جنيه مصري<br />
+            <code>"USD", "$"</code> ← دولار أمريكي<br />
+            <code>"AED", "درهم"</code> ← درهم إماراتي
+          </div>
+        </div>
+
+        <!-- أمثلة عملية -->
+        <div class="section">
+          <h3>🧮 6. أمثلة عملية للحساب</h3>
+
+          <div class="example-box">
+            <h4>مثال 1: استشارة فردية مع أ. سامر</h4>
+            <div class="price-display">
+              السعر الأساسي: 299 ريال<br />
+              رسوم الأخصائي: +50 ريال<br />
+              المجموع قبل الضريبة: 349 ريال<br />
+              الضريبة (15%): +52.35 ريال<br />
+              <strong>الإجمالي: 401.35 ريال</strong>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4>مثال 2: باقة 3 جلسات متابعة مع خصم</h4>
+            <div class="price-display">
+              سعر الجلسة: 199 ريال<br />
+              × 3 جلسات = 597 ريال<br />
+              خصم الباقة (15%): -89.55 ريال<br />
+              بعد الخصم: 507.45 ريال<br />
+              الضريبة (15%): +76.12 ريال<br />
+              <strong>الإجمالي: 583.57 ريال</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- اختبار الأسعار -->
+        <div class="section">
+          <h3>🧪 7. اختبار الأسعار الجديدة</h3>
+          <p>لاختبار الأسعار بعد التعديل:</p>
+
+          <div class="code-block">
+            // افتح الكونسول في المتصفح واكتب:
+            <span class="highlight">calculateTotalPrice</span>('consultation',
+            'samer', null, 1) // النتيجة ستحتوي على: // subtotal, discount, tax,
+            total
+          </div>
+
+          <div class="example-box">
+            <strong>طريقة الاختبار:</strong><br />
+            1. افتح صفحة الدفع<br />
+            2. اضغط F12 لفتح المطور tools<br />
+            3. اذهب إلى Console<br />
+            4. اكتب الأمر أعلاه
+          </div>
+        </div>
+
+        <!-- تحديث الروابط -->
+        <div class="section">
+          <h3>🔗 8. تمرير الأسعار عبر الروابط</h3>
+          <p>يمكن تمرير خصومات معينة عبر الرابط:</p>
+
+          <div class="code-block">
+            payment.html?service=consultation&specialist=samer&discount=firstSession&package=1
+          </div>
+
+          <div class="example-box">
+            <strong>معلمات الرابط:</strong><br />
+            <code>service</code> ← نوع الخدمة<br />
+            <code>specialist</code> ← معرف الأخصائي<br />
+            <code>discount</code> ← كود الخصم<br />
+            <code>package</code> ← عدد الجلسات
+          </div>
+        </div>
+
+        <!-- ملاحظات هامة -->
+        <div class="section">
+          <h3>⚠️ 9. ملاحظات هامة</h3>
+          <ul>
+            <li>تأكد من تحديث أسعار PayPal وStripe بنفس القيم</li>
+            <li>الضرائب تُحسب بعد الخصومات</li>
+            <li>رسوم الأخصائيين تُضاف قبل الضريبة</li>
+            <li>احفظ نسخة احتياطية قبل التعديل</li>
+            <li>اختبر الأسعار بعد كل تعديل</li>
+          </ul>
+        </div>
+
+        <!-- ملخص سريع -->
+        <div class="section">
+          <h3>📝 10. ملخص سريع للتعديل</h3>
+          <div class="code-block">
+            // 1. غيّر أسعار الخدمات في services // 2. عّدل رسوم الأخصائيين في
+            specialistFees // 3. غيّر نسبة الضريبة في taxRate // 4. أضف خصومات
+            في discounts // 5. غيّر العملة في currency و currencySymbol // 6.
+            اختبر بالدالة calculateTotalPrice()
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

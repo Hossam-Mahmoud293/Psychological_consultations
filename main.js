@@ -356,53 +356,43 @@ function handleBookingFormSubmit() {
       submitButton.textContent = "جاري إرسال الطلب...";
     }
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode(data),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Netlify form submission failed");
-        }
+    // تعطيل Netlify مؤقتاً للتطوير المحلي
+    console.log("📝 بيانات النموذج:", data);
+    console.log("🎯 بيانات الحجز:", data);
 
-        const select = document.getElementById("specialistSelect");
-        form.reset();
+    // حفظ بيانات الحجز في localStorage
+    localStorage.setItem("bookingData", JSON.stringify(data));
 
-        if (select && urlSpecialist) {
-          for (const option of select.options) {
-            if (option.value === urlSpecialist) {
-              option.selected = true;
-              break;
-            }
-          }
-        }
+    // محاكاة نجاح الإرسال للتطوير
+    setTimeout(() => {
+      // إخفاء رسائل الخطأ السابقة
+      errorMessage.style.display = "none";
 
-        successMessage.textContent =
-          "تم استلام طلب الحجز بنجاح، سيتم التواصل معك خلال 24–48 ساعة عمل لتأكيد الموعد." +
-          " رقم المتابعة الخاص بطلبك هو: " +
-          trackingId +
-          "، احتفظ به لمتابعة طلبك معنا.";
+      // تعيين رسالة النجاح
+      const successMessageText =
+        "✅ تم استلام طلب الحجز بنجاح! " +
+        "رقم المتابعة الخاص بطلبك هو: " +
+        trackingId +
+        "، " +
+        "سيتم توجيهك لصفحة تأكيد الحجز خلال 3 ثواني...";
 
-        if (!existingSuccess) {
-          form.appendChild(successMessage);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        errorMessage.textContent =
-          "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.";
+      successMessage.textContent = successMessageText;
 
-        if (!existingError) {
-          form.appendChild(errorMessage);
-        }
-      })
-      .finally(() => {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = originalButtonText;
-        }
-      });
+      if (!existingSuccess) {
+        form.appendChild(successMessage);
+      }
+
+      // إعادة تعيين الزر
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+
+      // التوجيه لصفحة تأكيد الحجز
+      setTimeout(() => {
+        window.location.href = `booking-confirmation.html?trackingId=${trackingId}`;
+      }, 3000);
+    }, 1000); // تأخير ثانية واحدة لمحاكاة الإرسال
   });
 }
 

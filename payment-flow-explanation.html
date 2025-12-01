@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تدفق الدفع | أين تذهب الأموال؟</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .flow-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: var(--color-surface);
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+      }
+      .flow-step {
+        display: flex;
+        align-items: center;
+        margin: 2rem 0;
+        padding: 1.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.7rem;
+        background: linear-gradient(135deg, #f3e8ff 0, #ffffff 100%);
+      }
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: var(--color-primary-dark);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-left: 1.5rem;
+        flex-shrink: 0;
+      }
+      .step-content {
+        flex: 1;
+      }
+      .step-content h3 {
+        margin: 0 0 0.5rem;
+        color: var(--color-primary-dark);
+      }
+      .step-content p {
+        margin: 0;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+      }
+      .flow-arrow {
+        text-align: center;
+        font-size: 2rem;
+        color: var(--color-primary);
+        margin: 1rem 0;
+      }
+      .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+      .method-card {
+        padding: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.7rem;
+        text-align: center;
+        background: white;
+      }
+      .method-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .warning-box {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        padding: 1rem;
+        border-radius: 0.7rem;
+        margin: 1rem 0;
+      }
+      .success-box {
+        background: #ecfdf3;
+        border: 1px solid #16a34a;
+        padding: 1rem;
+        border-radius: 0.7rem;
+        margin: 1rem 0;
+      }
+      .info-box {
+        background: #eff6ff;
+        border: 1px solid #0ea5e9;
+        padding: 1rem;
+        border-radius: 0.7rem;
+        margin: 1rem 0;
+      }
+      .account-details {
+        background: #f9fafb;
+        padding: 1rem;
+        border-radius: 0.7rem;
+        border: 1px dashed var(--color-border);
+        font-family: monospace;
+        font-size: 0.9rem;
+      }
+      .highlight {
+        color: var(--color-primary-dark);
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body class="theme">
+    <div class="container">
+      <div class="flow-container">
+        <h1>💰 أين تذهب أموال الدفع؟</h1>
+        <p>شرح كامل لتدفق الأموال من العميل إلى حسابك</p>
+
+        <!-- الخطوة 1 -->
+        <div class="flow-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>العميل يدفع المبلغ</h3>
+            <p>
+              العميل يختار طريقة الدفع (PayPal، بطاقة، تحويل بنكي) ويدفع
+              <span class="highlight">343.85 ريال</span> (مثال: استشارة فردية مع
+              الضريبة)
+            </p>
+          </div>
+        </div>
+
+        <div class="flow-arrow">⬇️</div>
+
+        <!-- الخطوة 2 -->
+        <div class="flow-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>بوابة الدفع تستلم المبلغ</h3>
+            <p>حسب طريقة الدفع:</p>
+            <div class="payment-methods">
+              <div class="method-card">
+                <div class="method-icon">💳</div>
+                <h4>PayPal</h4>
+                <p>تستلم PayPal المبلغ</p>
+              </div>
+              <div class="method-card">
+                <div class="method-icon">🏦</div>
+                <h4>Stripe</h4>
+                <p>تستلم Stripe المبلغ</p>
+              </div>
+              <div class="method-card">
+                <div class="method-icon">📱</div>
+                <h4>تحويل بنكي</h4>
+                <p>تذهب مباشرة لحسابك</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">⬇️</div>
+
+        <!-- الخطوة 3 -->
+        <div class="flow-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>خصم رسوم بوابة الدفع</h3>
+            <p>كل بوابة دفع تأخذ رسوم:</p>
+            <ul>
+              <li><strong>PayPal:</strong> 2.9% + 1 ريال ثابت</li>
+              <li><strong>Stripe:</strong> 2.9% + 1 ريال ثابت</li>
+              <li>
+                <strong>تحويل بنكي:</strong> بدون رسوم (أو رسوم بنكية بسيطة)
+              </li>
+            </ul>
+            <div class="warning-box">
+              <strong>مثال حساب الرسوم:</strong><br />
+              المبلغ: 343.85 ريال<br />
+              رسوم PayPal: 2.9% × 343.85 = 9.97 ريال + 1 ريال = 10.97 ريال<br />
+              <strong>الصافي بعد الرسوم: 332.88 ريال</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">⬇️</div>
+
+        <!-- الخطوة 4 -->
+        <div class="flow-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>تحويل المبلغ لحسابك</h3>
+            <p>بعد خصم الرسوم، يتم تحويل المبلغ إلى حسابك:</p>
+            <div class="info-box">
+              <h4>🏦 الحسابات التي تستلم الأموال:</h4>
+
+              <h5>1. حساب PayPal</h5>
+              <div class="account-details">
+                PayPal Email: your-email@domain.com
+              </div>
+
+              <h5>2. حساب بنكي (Stripe)</h5>
+              <div class="account-details">
+                البنك: البنك الأهلي السعودي<br />
+                الحساب: SA1234567890123456789012<br />
+                IBAN: SA89 3000 0000 0000 0000 0000
+              </div>
+
+              <h5>3. حساب بنكي مباشر (التحويل البنكي)</h5>
+              <div class="account-details">
+                البنك: البنك الأهلي السعودي<br />
+                الحساب: SA1234567890123456789012<br />
+                IBAN: SA89 3000 0000 0000 0000 0000<br />
+                المستفيد: شركة العافية النفسية
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">⬇️</div>
+
+        <!-- الخطوة 5 -->
+        <div class="flow-step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>توزيع الإيرادات</h3>
+            <p>المبلغ الصافي يوزع كالتالي:</p>
+            <div class="success-box">
+              <h4>💰 توزيع 332.88 ريال (المبلغ الصافي):</h4>
+              <ul>
+                <li><strong>أ. د. آمنة الراجحي:</strong> 70% = 233.02 ريال</li>
+                <li>
+                  <strong>المنصة (العافية النفسية):</strong> 30% = 99.86 ريال
+                </li>
+              </ul>
+              <p>
+                <strong>ملاحظة:</strong> نسبة التقسيم يمكن تعديلها حسب الاتفاق
+                مع الأخصائيين
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ملخص التدفق -->
+        <div class="info-box">
+          <h3>📋 ملخص تدفق الأموال</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div>
+              <h4>💵 يدفع العميل:</h4>
+              <p>343.85 ريال</p>
+
+              <h4>🏦 تستلم بوابة الدفع:</h4>
+              <p>343.85 ريال</p>
+
+              <h4>✂️ رسوم البوابة:</h4>
+              <p>-10.97 ريال</p>
+            </div>
+            <div>
+              <h4>💰 المبلغ الصافي:</h4>
+              <p>332.88 ريال</p>
+
+              <h4>👨‍⚕️ نصيب الأخصائي:</h4>
+              <p>233.02 ريال (70%)</p>
+
+              <h4>🏢 نصيب المنصة:</h4>
+              <p>99.86 ريال (30%)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- كيفية الإعداد -->
+        <div class="warning-box">
+          <h3>⚙️ كيفية إعداد استلام الأموال:</h3>
+
+          <h4>1. PayPal</h4>
+          <ul>
+            <li>إنشاء حساب PayPal Business</li>
+            <li>ربط حساب بنكي أو بطاقة</li>
+            <li>الحصول على Client ID</li>
+            <li>تحويل الأمويل من PayPal لحسابك البنكي</li>
+          </ul>
+
+          <h4>2. Stripe</h4>
+          <ul>
+            <li>إنشاء حساب Stripe</li>
+            <li>إضافة بيانات الحساب البنكي</li>
+            <li>الحصول على Publishable Key</li>
+            <li>تحويل الأموال كل 7 أيام عمل</li>
+          </ul>
+
+          <h4>3. التحويل البنكي</h4>
+          <ul>
+            <li>تصل الأموال مباشرة لحسابك</li>
+            <li>بدون رسوم بوابة دفع</li>
+            <li>تحتاج للتحقق اليدوي من التحويلات</li>
+          </ul>
+        </div>
+
+        <!-- ملاحظات مهمة -->
+        <div class="success-box">
+          <h3>📝 ملاحظات هامة:</h3>
+          <ul>
+            <li>
+              💰 <strong>بدون سجل تجاري:</strong> يمكنك استخدام حساب شخصي في
+              PayPal والتحويلات البنكية
+            </li>
+            <li>
+              🏢 <strong>مع سجل تجاري:</strong> يمكنك استخدام Stripe والبوابات
+              المحلية (Tap, HyperPay)
+            </li>
+            <li>
+              📊 <strong>ضرائب:</strong> يجب إضافة ضريبة القيمة المضافة (15%)
+              على السعر
+            </li>
+            <li>
+              📈 <strong>تقارير:</strong> احتفظ بسجلات جميع الدفعات لأغراض
+              ضريبية
+            </li>
+            <li>
+              🔄 <strong>تحويلات:</strong> PayPal وStripe يحتاجون 2-3 أيام عمل
+              للتحويل لحسابك
+            </li>
+          </ul>
+        </div>
+
+        <!-- الأسئلة الشائعة -->
+        <div class="info-box">
+          <h3>❓ أسئلة شائعة:</h3>
+
+          <h4>متى تصل الأموال لحسابي؟</h4>
+          <p>
+            • PayPal: 2-3 أيام عمل بعد سحبها<br />
+            • Stripe: 7 أيام عمل تلقائياً<br />
+            • تحويل بنكي: فوراً أو خلال 24 ساعة
+          </p>
+
+          <h4>هل هناك رسوم خفية؟</h4>
+          <p>
+            • رسوم بوابة الدفع فقط<br />
+            • رسوم تحويل العملة (إذا مختلفة)<br />
+            • رسوم بنكية للتحويلات الدولية
+          </p>
+
+          <h4>كيف أتابع الدفعات؟</h4>
+          <p>
+            • لوحة تحكم PayPal<br />
+            • لوحة تحكم Stripe<br />
+            > • كشف حساب البنك للتحويلات
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

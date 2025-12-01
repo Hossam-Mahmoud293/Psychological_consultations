@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل إعداد الحسابات البنكية | العافية النفسية</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .guide-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: var(--color-surface);
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+      }
+      .step-section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.7rem;
+        background: linear-gradient(135deg, #f3e8ff 0, #ffffff 100%);
+      }
+      .step-number {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: var(--color-primary-dark);
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        margin-left: 1rem;
+      }
+      .code-block {
+        background: #1f2937;
+        color: #f9fafb;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+      }
+      .highlight {
+        color: #fbbf24;
+      }
+      .success {
+        color: #34d399;
+      }
+      .warning {
+        color: #f87171;
+      }
+      .editable-field {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        padding: 0.5rem;
+        border-radius: 0.3rem;
+        margin: 0.2rem 0;
+        font-family: monospace;
+      }
+      .checklist {
+        list-style: none;
+        padding: 0;
+      }
+      .checklist li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .checklist li:before {
+        content: "✅ ";
+        margin-left: 0.5rem;
+      }
+      .example-box {
+        background: #f0f9ff;
+        border: 1px solid #0ea5e9;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+      }
+      .file-location {
+        background: #f3f4f6;
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.3rem;
+        font-family: monospace;
+        font-size: 0.85rem;
+      }
+      .arrow {
+        text-align: center;
+        font-size: 1.5rem;
+        color: var(--color-primary);
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body class="theme">
+    <div class="container">
+      <div class="guide-container">
+        <h1>🏦 دليل إعداد الحسابات البنكية</h1>
+        <p>خطوة بخطوة: كيف تضيف بيانات حسابك البنكي لاستلام الأموال</p>
+
+        <!-- الخطوة 1 -->
+        <div class="step-section">
+          <div class="step-number">1</div>
+          <h3>افتح ملف الدفع</h3>
+          <p>اذهب إلى ملف:</p>
+          <div class="file-location">
+            d:\Front-end Developer\Workspace\طمأنينه\payment.html
+          </div>
+
+          <div class="arrow">⬇️</div>
+
+          <p>ابحث عن قسم "التحويل البنكي" حوالي السطر 190:</p>
+          <div class="code-block">
+            &lt;div class="bank-details"&gt; &lt;h3&gt;بيانات الحساب
+            البنكي&lt;/h3&gt; &lt;div class="detail-row"&gt; &lt;span&gt;اسم
+            المستفيد:&lt;/span&gt; &lt;span&gt;<span class="editable-field"
+              >شركة العافية النفسية</span
+            >&lt;/span&gt; &lt;/div&gt; &lt;div class="detail-row"&gt;
+            &lt;span&gt;رقم الحساب:&lt;/span&gt; &lt;span&gt;<span
+              class="editable-field"
+              >SA1234567890123456789012</span
+            >&lt;/span&gt; &lt;/div&gt; &lt;!-- باقي البيانات --&gt;
+            &lt;/div&gt;
+          </div>
+        </div>
+
+        <!-- الخطوة 2 -->
+        <div class="step-section">
+          <div class="step-number">2</div>
+          <h3>غيّر بيانات الحساب</h3>
+          <p>استبدل البيانات الوهمية ببياناتك الحقيقية:</p>
+
+          <div class="example-box">
+            <h4>📝 البيانات المطلوبة تغييرها:</h4>
+
+            <p><strong>1. اسم المستفيد:</strong></p>
+            <div class="code-block">
+              <span class="highlight">قبل:</span> شركة العافية النفسية
+              <span class="success">بعد:</span> اسمك الحقيقي أو اسم شركتك
+            </div>
+
+            <p><strong>2. رقم الحساب:</strong></p>
+            <div class="code-block">
+              <span class="highlight">قبل:</span> SA1234567890123456789012
+              <span class="success">بعد:</span> رقم حسابك البنكي الفعلي
+            </div>
+
+            <p><strong>3. اسم البنك:</strong></p>
+            <div class="code-block">
+              <span class="highlight">قبل:</span> البنك الأهلي السعودي
+              <span class="success">بعد:</span> اسم بنكك (الراجحي، SAMBA، إلخ)
+            </div>
+
+            <p><strong>4. IBAN:</strong></p>
+            <div class="code-block">
+              <span class="highlight">قبل:</span> SA89 3000 0000 0000 0000 0000
+              <span class="success">بعد:</span> الـ IBAN الصحيح لحسابك
+            </div>
+
+            <p><strong>5. الفرع:</strong></p>
+            <div class="code-block">
+              <span class="highlight">قبل:</span> فرع الرياض - الرئيسي
+              <span class="success">بعد:</span> فرعك البنكي
+            </div>
+          </div>
+        </div>
+
+        <!-- الخطوة 3 -->
+        <div class="step-section">
+          <div class="step-number">3</div>
+          <h3>غيّر رقم الواتساب</h3>
+          <p>في نفس الملف، ابحث عن زر الواتساب:</p>
+          <div class="code-block">
+            &lt;button onclick="window.open('<span class="warning"
+              >https://wa.me/966500000000</span
+            >', '_blank')"&gt; إرسال الإيصال على الواتساب &lt;/button&gt;
+          </div>
+
+          <div class="example-box">
+            <h4>📱 كيف تغيّر الرقم:</h4>
+            <p>استبدل <code>966500000000</code> برقم الواتساب الخاص بك:</p>
+            <div class="code-block">
+              <span class="highlight">مثال:</span> لو رقمك 0551234567
+              <span class="success">يصبح:</span> https://wa.me/966551234567
+            </div>
+            <p><strong>ملاحظة:</strong> احذف الصفر من بداية الرقم وأضف 966</p>
+          </div>
+        </div>
+
+        <!-- الخطوة 4 -->
+        <div class="step-section">
+          <div class="step-number">4</div>
+          <h3>احفظ التغييرات</h3>
+          <p>بعد تعديل البيانات:</p>
+          <ul class="checklist">
+            <li>اضغط Ctrl + S لحفظ الملف</li>
+            <li>تأكد من أن البيانات صحيحة 100%</li>
+            <li>اختبر صفحة الدفع</li>
+          </ul>
+
+          <div class="arrow">⬇️</div>
+
+          <p>افتح صفحة الدفع وتأكد أن بياناتك ظهرت بشكل صحيح:</p>
+          <div class="file-location">payment.html</div>
+        </div>
+
+        <!-- أمثلة عملية -->
+        <div class="step-section">
+          <div class="step-number">5</div>
+          <h3>أمثلة عملية</h3>
+
+          <div class="example-box">
+            <h4>🏦 مثال 1: حساب بنكي شخصي</h4>
+            <div class="code-block">
+              &lt;span&gt;اسم المستفيد:&lt;/span&gt; &lt;span&gt;<span
+                class="success"
+                >أحمد محمد العبدالله</span
+              >&lt;/span&gt; &lt;span&gt;رقم الحساب:&lt;/span&gt;
+              &lt;span&gt;<span class="success">SA9876543210987654321012</span
+              >&lt;/span&gt; &lt;span&gt;اسم البنك:&lt;/span&gt;
+              &lt;span&gt;<span class="success">بنك الراجحي</span>&lt;/span&gt;
+              &lt;span&gt;IBAN:&lt;/span&gt; &lt;span&gt;<span class="success"
+                >SA65 8000 0000 6080 1016 7519</span
+              >&lt;/span&gt;
+            </div>
+          </div>
+
+          <div class="example-box">
+            <h4>🏢 مثال 2: حساب شركة</h4>
+            <div class="code-block">
+              &lt;span&gt;اسم المستفيد:&lt;/span&gt; &lt;span&gt;<span
+                class="success"
+                >شركة النمو والتطور للخدمات النفسية</span
+              >&lt;/span&gt; &lt;span&gt;رقم الحساب:&lt;/span&gt;
+              &lt;span&gt;<span class="success">SA5555666677778888999000</span
+              >&lt;/span&gt; &lt;span&gt;اسم البنك:&lt;/span&gt;
+              &lt;span&gt;<span class="success">البنك السعودي الفرنسي</span
+              >&lt;/span&gt; &lt;span&gt;IBAN:&lt;/span&gt; &lt;span&gt;<span
+                class="success"
+                >SA88 5000 0000 5555 6666 7778</span
+              >&lt;/span&gt;
+            </div>
+          </div>
+        </div>
+
+        <!-- ملاحظات أمنية -->
+        <div class="step-section">
+          <div class="step-number">6</div>
+          <h3>⚠️ ملاحظات أمنية مهمة</h3>
+          <div class="warning-box">
+            <h4>🔒 احتياطات الأمان:</h4>
+            <ul>
+              <li>
+                <strong>لا تشارك</strong> بيانات الحساب مع أي شخص غير موثوق
+              </li>
+              <li>
+                <strong>تأكد</strong> من أن الملفات على جهازك محمي بكلمة مرور
+              </li>
+              <li>
+                <strong>لا ترفع</strong> الملفات على GitHub أو أي مكان عام
+                ببيانات حقيقية
+              </li>
+              <li><strong>استخدم</strong> بيانات وهمية للاختبار فقط</li>
+            </ul>
+          </div>
+
+          <div class="example-box">
+            <h4>💡 نصيحة احترافية:</h4>
+            <p>
+              استخدم متغيرات في ملف الإعدادات بدلاً من كتابة البيانات مباشرة:
+            </p>
+            <div class="code-block">
+              <span class="highlight">بدلاً من:</span>
+              &lt;span&gt;SA1234567890123456789012&lt;/span&gt;
+
+              <span class="success">استخدم:</span>
+              &lt;span id="bank-account"&gt;&lt;/span&gt; &lt;script&gt;
+              document.getElementById('bank-account').textContent =
+              'SA1234567890123456789012'; &lt;/script&gt;
+            </div>
+          </div>
+        </div>
+
+        <!-- ملخص التحقق -->
+        <div class="step-section">
+          <div class="step-number">7</div>
+          <h3>✅ قائمة التحقق النهائية</h3>
+          <p>قبل إطلاق الموقع، تأكد من:</p>
+          <ul class="checklist">
+            <li>اسم المستفيد صحيح ومطابق لبطاقة البنك</li>
+            <li>رقم الحساب صحيح 100%</li>
+            <li>اسم البنك مكتوب بشكل صحيح</li>
+            <li>رقم IBAN صحيح (24 رقماً)</li>
+            <li>رقم الواتساب يعمل</li>
+            <li>صفحة الدفع تعرض البيانات بشكل صحيح</li>
+            <li>اختبار تحويل تجريبي (مبلغ صغير)</li>
+          </ul>
+        </div>
+
+        <!-- الأسئلة الشائعة -->
+        <div class="step-section">
+          <div class="step-number">8</div>
+          <h3>❓ أسئلة شائعة</h3>
+
+          <h4>س: هل يمكنني استخدام حساب شخصي؟</h4>
+          <p>ج: نعم، يمكنك استخدام حساب شخصي بدون سجل تجاري في البداية</p>
+
+          <h4>س: ما هو الـ IBAN؟</h4>
+          <p>
+            ج: هو الرقم الدولي للحساب البنكي، تجده في تطبيق البنك أو كشف الحساب
+          </p>
+
+          <h4>س: هل يجب أن يكون الحساب بنكياً سعودياً؟</h4>
+          <p>ج: نعم، لاستلام الريال السعودي يجب أن يكون الحساب في بنك سعودي</p>
+
+          <h4>س: كم يستغرق وصول التحويل؟</h4>
+          <p>ج: التحويلات البنكية داخل السعودية تصل خلال 24 ساعة عادةً</p>
+        </div>
+
+        <!-- الخطوات التالية -->
+        <div class="step-section">
+          <div class="step-number">9</div>
+          <h3>🚀 الخطوات التالية</h3>
+          <p>بعد إعداد الحساب البنكي:</p>
+          <ol>
+            <li>اختبر صفحة الدفع ببيانات وهمية</li>
+            <li>اطلب من صديق إرسال تحويل تجريبي</li>
+            <li>تأكد من استلام إشعار الواتساب</li>
+            <li>سجل في PayPal وStripe (اختياري)</li>
+            <li>أطلق الموقع رسمياً</li>
+          </ol>
+
+          <div class="success-box">
+            <h4>🎉 مبروك!</h4>
+            <p>الآن جاهز لاستلام الأموال من العملاء!</p>
+            <p>أي استفسار، أنا موجود للمساعدة 😊</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
