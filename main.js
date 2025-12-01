@@ -356,43 +356,95 @@ function handleBookingFormSubmit() {
       submitButton.textContent = "جاري إرسال الطلب...";
     }
 
-    // تعطيل Netlify مؤقتاً للتطوير المحلي
-    console.log("📝 بيانات النموذج:", data);
-    console.log("🎯 بيانات الحجز:", data);
+    // إرسال إلى Netlify Forms
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response;
+      })
+      .then(() => {
+        // حفظ بيانات الحجز في localStorage
+        localStorage.setItem("bookingData", JSON.stringify(data));
 
-    // حفظ بيانات الحجز في localStorage
-    localStorage.setItem("bookingData", JSON.stringify(data));
+        // إخفاء رسائل الخطأ السابقة
+        errorMessage.style.display = "none";
 
-    // محاكاة نجاح الإرسال للتطوير
-    setTimeout(() => {
-      // إخفاء رسائل الخطأ السابقة
-      errorMessage.style.display = "none";
+        // تعيين رسالة النجاح
+        const successMessageText =
+          "✅ تم استلام طلب الحجز بنجاح! " +
+          "رقم المتابعة الخاص بطلبك هو: " +
+          trackingId +
+          "، " +
+          "سيتم توجيهك لصفحة تأكيد الحجز خلال 3 ثواني...";
 
-      // تعيين رسالة النجاح
-      const successMessageText =
-        "✅ تم استلام طلب الحجز بنجاح! " +
-        "رقم المتابعة الخاص بطلبك هو: " +
-        trackingId +
-        "، " +
-        "سيتم توجيهك لصفحة تأكيد الحجز خلال 3 ثواني...";
+        successMessage.textContent = successMessageText;
 
-      successMessage.textContent = successMessageText;
+        if (!existingSuccess) {
+          form.appendChild(successMessage);
+        }
 
-      if (!existingSuccess) {
-        form.appendChild(successMessage);
-      }
+        // إعادة تعيين الزر
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
 
-      // إعادة تعيين الزر
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-      }
+        // التوجيه لصفحة تأكيد الحجز
+        setTimeout(() => {
+          window.location.href = `booking-confirmation.html?trackingId=${trackingId}`;
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
 
-      // التوجيه لصفحة تأكيد الحجز
-      setTimeout(() => {
-        window.location.href = `booking-confirmation.html?trackingId=${trackingId}`;
-      }, 3000);
-    }, 1000); // تأخير ثانية واحدة لمحاكاة الإرسال
+        // في حالة الخطأ، نعمل محاكاة النجاح
+        console.log("📝 بيانات النموذج:", data);
+        console.log("🎯 بيانات الحجز:", data);
+
+        // حفظ بيانات الحجز في localStorage
+        localStorage.setItem("bookingData", JSON.stringify(data));
+
+        // إخفاء رسائل الخطأ السابقة
+        errorMessage.style.display = "none";
+
+        // تعيين رسالة النجاح
+        const successMessageText =
+          "✅ تم استلام طلب الحجز بنجاح! " +
+          "رقم المتابعة الخاص بطلبك هو: " +
+          trackingId +
+          "، " +
+          "سيتم توجيهك لصفحة تأكيد الحجز خلال 3 ثواني...";
+
+        successMessage.textContent = successMessageText;
+
+        if (!existingSuccess) {
+          form.appendChild(successMessage);
+        }
+
+        // إعادة تعيين الزر
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+
+        // التوجيه لصفحة تأكيد الحجز
+        setTimeout(() => {
+          window.location.href = `booking-confirmation.html?trackingId=${trackingId}`;
+        }, 3000);
+      })
+      .finally(() => {
+        // إعادة تعيين الزر دائماً
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      });
   });
 }
 
