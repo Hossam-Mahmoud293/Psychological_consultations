@@ -259,6 +259,38 @@
 
     <script src="main.js"></script>
     <script>
+      // Handle form submission and redirect to confirmation page
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(this);
+        const data = {};
+        for (let [key, value] of formData.entries()) {
+          data[key] = value;
+        }
+
+        // Store data in localStorage
+        localStorage.setItem("bookingData", JSON.stringify(data));
+
+        // Submit to Formspree
+        fetch("https://formspree.io/f/mzznvqar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then(() => {
+            // Redirect to confirmation page
+            window.location.href = "booking-confirmation.html";
+          })
+          .catch(() => {
+            // Fallback: redirect anyway
+            window.location.href = "booking-confirmation.html";
+          });
+      });
+
       // قراءة اسم الأخصائي من رابط الحجز (إن وجد) وملء القائمة تلقائيًا
       const params = new URLSearchParams(window.location.search);
       const specialist = params.get("specialist");
