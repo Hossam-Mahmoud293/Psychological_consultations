@@ -46,19 +46,7 @@
 
       <section class="section">
         <div class="container booking-layout">
-          <form
-            name="booking"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-            action="/booking-confirmation.html"
-          >
-            <input type="hidden" name="form-name" value="booking" />
-            <p style="display: none">
-              <label
-                >لا تملأ هذا الحقل إن كنت إنسانًا: <input name="bot-field"
-              /></label>
-            </p>
+          <form name="booking" method="GET" action="booking-confirmation.html">
             <div class="form-group-inline">
               <label class="field">
                 <span>الاسم الكامل</span>
